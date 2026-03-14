@@ -1,0 +1,2548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lightning Bug Holler — Direct Booking | Pigeon Forge, TN</title>
+  <meta name="description" content="Lightning Bug Holler — 3-level cabin in Pigeon Forge near Dollywood with private indoor pool, Van Gogh mural, arcade game room, hot tub, sauna, pizza oven, secret clubhouse, and fire pit decks. Sleeps 7. Pets welcome. Book direct for the best rate." />
+  <meta property="og:title" content="Lightning Bug Holler — Direct Booking" />
+  <meta property="og:description" content="Private indoor pool. Arcade game room. Van Gogh mural. Hot tub. Sauna. Fire pit decks. Minutes from Dollywood." />
+  <meta property="og:image" content="c7f6895a-c03c-42bf-b9bd-8832c338a975.avif" />
+  <meta property="og:url" content="https://lightningbugholler.net/" />
+  <!-- TODO: Replace with your actual domain once live -->
+  <link rel="canonical" href="https://lightningbugholler.net/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --night: #080d18;
+      --deep: #0d1525;
+      --blue: #162240;
+      --swirl: #1a3860;
+      --forest: #0e2218;
+      --moss: #1a3828;
+      --gold: #e8c462;
+      --gold-light: #f0d07a;
+      --gold-dim: rgba(232,196,98,0.12);
+      --gold-border: rgba(232,196,98,0.28);
+      --gold-glow: rgba(232,196,98,0.4);
+      --amber: #d4874a;
+      --cream: #f5f0e6;
+      --urgent: #e85d3a;
+      --firefly: rgba(200,255,120,0.7);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--night);
+      color: var(--cream);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* ── FIREFLY / STARS CANVAS ── */
+    #stars-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.38;
+      mix-blend-mode: screen;
+    }
+    @media (max-width: 980px) {
+      #stars-canvas { display: none; }
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 36px;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(8,13,24,0.95), transparent);
+      transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(8,13,24,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(232,196,98,0.1);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1;
+    }
+    .nav-logo-bug {
+      font-size: 1.1rem;
+      display: inline-block;
+      animation: floatUp 3s ease-in-out infinite;
+      line-height: 1;
+    }
+    .nav-logo-text {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .nav-logo-sub {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.35);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      padding-left: 6px;
+      border-left: 1px solid rgba(255,255,255,0.15);
+    }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-link {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--gold); }
+    .nav-book {
+      background: var(--gold);
+      color: var(--night);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: opacity 0.2s, box-shadow 0.3s;
+    }
+    .nav-book:hover { opacity: 0.88; box-shadow: 0 0 22px rgba(232,196,98,0.3); }
+
+    /* ── HERO SLIDESHOW ── */
+    .hero {
+      position: relative;
+      height: 72vh;
+      min-height: 480px;
+      max-height: 720px;
+      overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: 1; }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      max-width: 100%;
+      animation: kenBurns 10s ease-in-out infinite alternate;
+    }
+    @keyframes kenBurns {
+      0% { transform: scale(1.0); }
+      100% { transform: scale(1.04); }
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(8,13,24,0.55) 0%, transparent 25%, transparent 60%, rgba(8,13,24,0.3) 100%);
+      z-index: 2;
+    }
+    .hero-indicators {
+      position: absolute;
+      bottom: 28px; right: 36px;
+      z-index: 5;
+      display: flex; gap: 8px;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.2s forwards;
+    }
+    .hero-indicator {
+      width: 28px; height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.3s, width 0.3s;
+    }
+    .hero-indicator.active {
+      background: var(--gold);
+      width: 44px;
+      box-shadow: 0 0 8px rgba(232,196,98,0.4);
+    }
+
+    /* ── HERO INTRO ── */
+    .hero-intro {
+      background: var(--night);
+      padding: 56px 48px 60px;
+      position: relative; z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hero-intro::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+    .hero-intro-inner { max-width: 1140px; margin: 0 auto; }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6.5vw, 5.4rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 22px;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.68);
+      max-width: 620px;
+      line-height: 1.8;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+    .hero-meta {
+      display: flex; gap: 28px;
+      align-items: center; flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.62);
+    }
+    .hero-meta-item svg {
+      width: 14px; height: 14px;
+      stroke: var(--gold); fill: none;
+      flex-shrink: 0;
+    }
+    .meta-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.13); }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold);
+      color: var(--night);
+      font-size: 0.83rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 14px 34px; border-radius: 3px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.3s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(232,196,98,0.28); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.83rem; font-weight: 400;
+      letter-spacing: 0.04em;
+      padding: 14px 28px; border-radius: 3px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      position: relative; z-index: 10;
+      background: linear-gradient(135deg, #11203e, #162547);
+      border-top: 1px solid var(--gold-border);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 16px 48px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 36px; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 0.79rem;
+      color: rgba(255,255,255,0.72);
+    }
+    .trust-icon { font-size: 1rem; }
+    .trust-highlight { color: var(--gold); font-weight: 600; }
+    .trust-sep { color: rgba(255,255,255,0.18); font-size: 1.2rem; line-height: 1; }
+
+    /* ── SECTIONS ── */
+    .section { position: relative; z-index: 10; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 48px; }
+    .section-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--gold); opacity: 0.5;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+      font-weight: 300; line-height: 1.18;
+      color: #fff; margin-bottom: 14px;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    /* ── GALLERY ── */
+    .gallery-section { background: var(--deep); padding: 84px 0; }
+    .gallery-header { padding: 0 48px; margin-bottom: 36px; }
+    .gallery-more { position: relative; }
+    .gallery-more-overlay {
+      position: absolute; inset: 0;
+      background: rgba(8,13,24,0.62);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .gallery-more-overlay:hover { background: rgba(8,13,24,0.45); }
+    .gallery-more-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: #fff;
+      font-weight: 300; letter-spacing: 0.04em;
+    }
+
+    /* ── GALLERY TABS ── */
+    .gallery-tabs {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding: 0 48px; margin-bottom: 28px;
+    }
+    .gallery-tab {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem; font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 7px 18px; border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .gallery-tab:hover { border-color: var(--gold); color: var(--gold); }
+    .gallery-tab.active {
+      background: var(--gold); border-color: var(--gold);
+      color: var(--night); font-weight: 600;
+    }
+
+    /* ── GALLERY MASONRY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 240px;
+      gap: 4px; padding: 0 4px;
+    }
+    .gallery-item {
+      overflow: hidden; cursor: pointer; position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.65s ease;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(8,13,24,0);
+      transition: background 0.3s;
+    }
+    .gallery-item:hover::after { background: rgba(8,13,24,0.18); }
+    .gallery-item-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(8,13,24,0.85), transparent);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.72rem; padding: 20px 12px 10px;
+      opacity: 0; transition: opacity 0.3s;
+      z-index: 3; pointer-events: none;
+    }
+    .gallery-item:hover .gallery-item-label { opacity: 1; }
+    .gallery-item.hidden { display: none; }
+    .gallery-item.gallery-hidden { display: none; }
+
+    /* Show More button */
+    .gallery-show-more-wrap {
+      display: flex; justify-content: center;
+      padding: 28px 0 8px;
+    }
+    .gallery-show-more {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 11px 32px; border-radius: 3px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .gallery-show-more:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(4,7,14,0.97);
+      z-index: 999; align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { max-width: 90vw; max-height: 90vh; position: relative; }
+    .lightbox-inner img {
+      max-width: 90vw; max-height: 88vh;
+      object-fit: contain; border-radius: 4px;
+    }
+    .lightbox-close {
+      position: absolute; top: -42px; right: 0;
+      background: none; border: none;
+      color: rgba(255,255,255,0.65); font-size: 1.5rem;
+      cursor: pointer; transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: var(--gold); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff; width: 46px; height: 46px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.1rem;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(232,196,98,0.2); }
+    .lightbox-prev { right: calc(100% + 18px); }
+    .lightbox-next { left: calc(100% + 18px); }
+    .lightbox-counter {
+      position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%);
+      font-size: 0.72rem; color: rgba(255,255,255,0.35);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights { background: var(--night); padding: 80px 0 70px; }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px; margin-top: 44px;
+    }
+    .highlight-card {
+      background: var(--deep);
+      padding: 32px 24px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .highlight-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 160px;
+      background: var(--gold-dim);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .highlight-card:hover { border-color: var(--gold); background: #111928; }
+    .highlight-card:hover::before { opacity: 1; }
+    .highlight-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+    .highlight-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.18rem; font-weight: 400;
+      color: #fff; margin-bottom: 8px;
+    }
+    .highlight-desc { font-size: 0.8rem; color: rgba(255,255,255,0.52); line-height: 1.75; }
+
+    /* ── DIFFERENTIATORS ── */
+    .diff-section { background: var(--deep); padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.04); }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 40px;
+    }
+    .diff-card {
+      background: linear-gradient(135deg, var(--forest), var(--moss));
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 28px 24px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .diff-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
+    .diff-card-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .diff-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: #fff;
+      margin-bottom: 6px;
+    }
+    .diff-card-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+    /* ── AMENITIES ── */
+    .amenities-section { background: var(--night); padding: 52px 0; }
+    .amenities-inner { margin-top: 36px; }
+    .amenity-group { margin-bottom: 24px; }
+    .amenity-group-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.56rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .amenity-chips {
+      display: flex; flex-wrap: wrap; gap: 7px;
+    }
+    .amenity-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 4px;
+      padding: 5px 11px;
+      font-size: 0.78rem; color: rgba(255,255,255,0.68);
+      white-space: nowrap;
+    }
+    .amenity-chip-check { color: var(--gold); font-size: 0.6rem; }
+
+    /* ── GOOD TO KNOW ── */
+    .gtk-section { background: var(--deep); padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.04); }
+    .gtk-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px; margin-top: 36px;
+    }
+    .gtk-card {
+      background: var(--night);
+      padding: 24px 20px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .gtk-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .gtk-label {
+      font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold);
+      font-family: 'DM Mono', monospace; margin-bottom: 5px;
+    }
+    .gtk-value { font-size: 0.83rem; color: rgba(255,255,255,0.68); line-height: 1.6; }
+
+    /* ── BOOKING ── */
+    .booking-section { background: var(--night); padding: 84px 0; }
+    .booking-layout {
+      display: grid;
+      grid-template-columns: 1fr 430px;
+      gap: 60px; align-items: start; margin-top: 44px;
+    }
+    .booking-pitch {
+      font-size: 0.9rem; color: rgba(255,255,255,0.62);
+      line-height: 1.85; margin-bottom: 32px; font-weight: 300;
+    }
+    .direct-perks { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+    .perk { display: flex; align-items: flex-start; gap: 14px; }
+    .perk-icon {
+      width: 38px; height: 38px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .perk-text strong { display: block; font-size: 0.86rem; color: #fff; margin-bottom: 2px; }
+    .perk-text span { font-size: 0.77rem; color: rgba(255,255,255,0.48); }
+    .price-callout {
+      background: linear-gradient(135deg, var(--blue), var(--swirl));
+      border: 1px solid var(--gold-border);
+      border-radius: 10px; padding: 24px 28px;
+    }
+    .price-from {
+      font-size: 0.65rem; color: rgba(255,255,255,0.45);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem; color: var(--gold);
+      font-weight: 300; line-height: 1;
+    }
+    .price-amount small { font-size: 1rem; color: rgba(255,255,255,0.45); }
+    .price-note { font-size: 0.73rem; color: rgba(255,255,255,0.4); margin-top: 6px; }
+
+    .booking-widget {
+      background: var(--deep);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+    }
+    .booking-widget-header {
+      background: linear-gradient(135deg, var(--blue), var(--swirl));
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--gold-border);
+      border-radius: 12px 12px 0 0;
+    }
+    .booking-widget-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; color: #fff; font-weight: 400; margin-bottom: 4px;
+    }
+    .booking-widget-sub { font-size: 0.73rem; color: rgba(255,255,255,0.5); }
+    .booking-widget-body { padding: 0; }
+    .urgency-badge {
+      display: flex; align-items: center; gap: 9px;
+      background: rgba(232,93,58,0.09);
+      border: 1px solid rgba(232,93,58,0.22);
+      border-radius: 7px; padding: 10px 16px; margin: 18px 18px 0;
+    }
+    .urgency-dot {
+      width: 8px; height: 8px;
+      background: var(--urgent); border-radius: 50%; flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(232,93,58,0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(232,93,58,0); }
+    }
+    .urgency-text { font-size: 0.77rem; color: rgba(255,255,255,0.72); }
+    .urgency-text strong { color: var(--urgent); }
+    #hospitable-widget {
+      width: 100%;
+    }
+    #booking-iframe {
+      display: block;
+      transition: height 0.3s ease;
+    }
+
+
+    /* ── LOCATION ── */
+    .location-section { background: var(--deep); padding: 80px 0; }
+    .location-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; margin-top: 44px;
+    }
+    .location-map {
+      background: var(--blue); border-radius: 12px;
+      overflow: hidden; height: 380px;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .location-map img { width: 100%; height: 100%; object-fit: cover; opacity: 0.82; }
+    .location-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(8,13,24,0.6));
+    }
+    .map-pin {
+      position: absolute; bottom: 24px; left: 24px;
+      background: rgba(8,13,24,0.92);
+      border: 1px solid var(--gold-border);
+      border-radius: 8px; padding: 10px 16px;
+      font-size: 0.77rem; color: rgba(255,255,255,0.72); z-index: 2;
+      backdrop-filter: blur(8px);
+    }
+    .map-pin strong { color: var(--gold); display: block; margin-bottom: 2px; }
+    .distance-list { display: flex; flex-direction: column; gap: 0; }
+    .distance-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .distance-item:last-child { border-bottom: none; }
+    .distance-place { font-size: 0.86rem; color: rgba(255,255,255,0.72); }
+    .distance-time {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      padding: 3px 11px; border-radius: 20px;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section { background: var(--night); padding: 80px 0; }
+    .reviews-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; margin-bottom: 40px;
+    }
+    .rating-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.8rem; font-weight: 300;
+      color: var(--gold); line-height: 1;
+    }
+    .rating-stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+    .rating-count { font-size: 0.73rem; color: rgba(255,255,255,0.38); margin-top: 2px; }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .review-card {
+      background: var(--deep);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 26px;
+      transition: border-color 0.3s;
+    }
+    .review-card:hover { border-color: var(--gold-border); }
+    .review-stars { color: var(--gold); font-size: 0.73rem; letter-spacing: 2px; margin-bottom: 13px; }
+    .review-text {
+      font-size: 0.84rem; color: rgba(255,255,255,0.62);
+      line-height: 1.8; margin-bottom: 18px; font-style: italic;
+    }
+    .review-author { font-size: 0.72rem; color: rgba(255,255,255,0.32); font-family: 'DM Mono', monospace; }
+
+    /* ── REVIEWS VERIFIED ── */
+    .reviews-verified {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .reviews-airbnb-link {
+      color: rgba(255,255,255,0.5);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    .reviews-airbnb-link:hover { color: var(--gold); }
+    .reviews-verified-sep { color: rgba(255,255,255,0.2); }
+    .reviews-verified-note {
+      color: rgba(232,196,98,0.5);
+      font-style: italic;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--deep); padding: 80px 0; }
+    .faq-list { margin-top: 44px; display: flex; flex-direction: column; gap: 2px; }
+    .faq-item { background: var(--night); }
+    .faq-question {
+      width: 100%; text-align: left;
+      padding: 20px 24px;
+      background: none; border: none;
+      color: rgba(255,255,255,0.82);
+      font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
+      border-left: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .faq-question:hover { color: var(--gold); border-left-color: var(--gold); background: rgba(232,196,98,0.04); }
+    .faq-question.open { color: var(--gold); border-left-color: var(--gold); background: rgba(232,196,98,0.05); }
+    .faq-icon { font-size: 1.1rem; flex-shrink: 0; transition: transform 0.3s; color: var(--gold); }
+    .faq-question.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      padding: 0 24px;
+    }
+    .faq-answer.open {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+    .faq-answer-inner {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 16px;
+    }
+
+    /* ── CONTACT FORM ── */
+    .contact-section { background: var(--night); padding: 80px 0; }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: start; margin-top: 44px;
+    }
+    .contact-pitch {
+      font-size: 0.9rem; color: rgba(255,255,255,0.58);
+      line-height: 1.85; font-weight: 300; margin-bottom: 28px;
+    }
+    .contact-detail {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.84rem; color: rgba(255,255,255,0.65);
+    }
+    .contact-detail-icon {
+      width: 34px; height: 34px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; flex-shrink: 0;
+    }
+    .contact-form {
+      background: var(--deep);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 32px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+    .form-group label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px; color: rgba(255,255,255,0.85);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.87rem; padding: 12px 14px;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none; width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      background: rgba(232,196,98,0.04);
+    }
+    .form-group select option { background: var(--deep); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    /* Honeypot */
+    .hp-field { display: none !important; }
+    .form-submit {
+      width: 100%; padding: 14px;
+      background: var(--gold); color: var(--night);
+      font-size: 0.83rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; border-radius: 3px;
+      cursor: pointer; margin-top: 6px;
+      transition: opacity 0.2s, transform 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+    .form-success {
+      display: none; text-align: center; padding: 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; color: var(--gold);
+    }
+    .form-success.visible { display: block; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--blue), var(--swirl));
+      border-top: 1px solid var(--gold-border);
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .cta-content {
+      padding: 88px 48px; max-width: 700px;
+      margin: 0 auto; text-align: center;
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+      font-weight: 300; color: #fff; line-height: 1.2; margin-bottom: 16px;
+    }
+    .cta-title em { font-style: italic; color: var(--gold); }
+    .cta-sub {
+      font-size: 0.9rem; color: rgba(255,255,255,0.62);
+      line-height: 1.85; margin-bottom: 38px;
+      max-width: 480px; margin-left: auto; margin-right: auto;
+    }
+    .cta-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+    /* ── CTA URGENCY BADGE ── */
+    .cta-urgency-badge {
+      display: inline-block;
+      background: rgba(232,196,98,0.1);
+      border: 1px solid rgba(232,196,98,0.25);
+      border-radius: 20px;
+      padding: 7px 18px;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+    .cta-urgency-badge strong { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: rgba(4,7,14,0.99);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 40px 48px;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; color: var(--gold); text-decoration: none;
+    }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 0.76rem; color: rgba(255,255,255,0.38);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.22); }
+
+    .footer-social { display: flex; align-items: center; }
+    .footer-instagram {
+      color: rgba(255,255,255,0.3);
+      transition: color 0.2s;
+      display: flex; align-items: center;
+    }
+    .footer-instagram:hover { color: var(--gold); }
+
+    /* ── MOBILE BOOKING BAR ── */
+    .mobile-book-bar {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(8,13,24,0.97);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--gold-border);
+      padding: 12px 20px;
+      align-items: center; justify-content: space-between; gap: 12px;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .mobile-book-bar.visible { transform: translateY(0); }
+    .mobile-book-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; color: var(--gold); line-height: 1.2;
+    }
+    .mobile-book-price small { font-size: 0.72rem; color: rgba(255,255,255,0.45); font-family: 'DM Sans', sans-serif; }
+    .mobile-book-rating { font-size: 0.67rem; color: rgba(255,255,255,0.45); }
+    .mobile-book-rating span { color: var(--gold); }
+    .mobile-book-btn {
+      background: var(--gold); color: var(--night);
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 12px 28px; border-radius: 3px;
+      text-decoration: none; white-space: nowrap; flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    .mobile-book-btn:hover { opacity: 0.88; }
+
+    /* ── FIREFLY CURSOR HINT ── */
+    body { cursor: default; }
+
+    /* ── SHIMMER ANIMATION ── */
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(232,196,98,0.15), 0 0 40px rgba(200,255,100,0.05); }
+      50% { box-shadow: 0 0 40px rgba(232,196,98,0.3), 0 0 80px rgba(200,255,100,0.12); }
+    }
+    @keyframes borderSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── SECTION WAVE DIVIDERS ── */
+    .wave-divider {
+      position: relative;
+      height: 60px;
+      overflow: hidden;
+      background: var(--deep);
+    }
+    .wave-divider svg {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    /* ── ANIMATED NAV LOGO ── */
+    .nav-logo-bug {
+      font-size: 1.2rem;
+      display: inline-block;
+      animation: floatUp 3s ease-in-out infinite;
+    }
+
+    /* ── ENHANCED TRUST BAR ── */
+    .trust-bar {
+      position: relative; z-index: 10;
+      background: linear-gradient(135deg, #0e1a35, #152144, #0e1a35);
+      background-size: 200% 100%;
+      animation: shimmer 8s linear infinite;
+      border-top: 1px solid var(--gold-border);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 16px 48px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 36px; flex-wrap: wrap;
+    }
+
+    /* ── ENHANCED HIGHLIGHT CARDS ── */
+    .highlight-card {
+      background: var(--deep);
+      padding: 32px 24px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .highlight-card:hover {
+      border-color: var(--gold);
+      background: #111928;
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(200,255,100,0.06);
+    }
+
+    /* ── POOL HERO CALLOUT ── */
+    .pool-callout {
+      position: relative;
+      background: linear-gradient(135deg, #061420, #0a1e2e, #061a14);
+      padding: 80px 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(100,200,255,0.12);
+      border-bottom: 1px solid rgba(100,200,255,0.12);
+    }
+    .pool-callout::before {
+      content: '';
+      position: absolute;
+      top: -40%; left: -10%;
+      width: 60%; height: 180%;
+      background: radial-gradient(ellipse, rgba(60,150,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pool-callout::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; right: -10%;
+      width: 50%; height: 120%;
+      background: radial-gradient(ellipse, rgba(100,255,150,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pool-callout-inner {
+      max-width: 1140px; margin: 0 auto; padding: 0 48px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; position: relative; z-index: 2;
+    }
+    .pool-img-wrap {
+      position: relative; border-radius: 16px; overflow: hidden;
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+    .pool-img-wrap img {
+      width: 100%; height: 400px;
+      object-fit: cover; display: block;
+      border-radius: 16px;
+    }
+    .pool-img-badge {
+      position: absolute; bottom: 20px; left: 20px;
+      background: rgba(6,14,30,0.92);
+      border: 1px solid rgba(100,200,255,0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 10px; padding: 12px 18px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(150,220,255,0.9);
+    }
+    .pool-text-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(100,200,255,0.7); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pool-text-eyebrow::before {
+      content: ''; width: 20px; height: 1px;
+      background: rgba(100,200,255,0.5);
+    }
+    .pool-text-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300; line-height: 1.1; color: #fff;
+      margin-bottom: 20px;
+    }
+    .pool-text-title em { font-style: italic; color: rgba(150,220,255,0.85); }
+    .pool-text-desc {
+      font-size: 0.9rem; color: rgba(255,255,255,0.58);
+      line-height: 1.85; font-weight: 300; margin-bottom: 28px;
+    }
+    .pool-stats {
+      display: flex; gap: 32px;
+    }
+    .pool-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; color: rgba(150,220,255,0.9);
+      font-weight: 300; line-height: 1;
+    }
+    .pool-stat-label {
+      font-size: 0.68rem; color: rgba(255,255,255,0.38);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;
+    }
+
+    /* ── ENHANCED REVIEW CARDS ── */
+    .review-card {
+      background: var(--deep);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 26px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .review-card:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-3px);
+    }
+
+    /* ── ANIMATED SECTION EYEBROW ── */
+    .section-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0;
+      animation: none;
+    }
+    .section.in-view .section-eyebrow,
+    .fade-in.visible .section-eyebrow {
+      opacity: 1;
+    }
+
+    /* ── SCROLL PROGRESS BAR ── */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(200,255,100,0.8), var(--gold), rgba(200,255,100,0.8));
+      background-size: 200% 100%;
+      animation: shimmer 2s linear infinite;
+      z-index: 999;
+      width: 0%;
+      transition: width 0.1s;
+      pointer-events: none;
+    }
+
+    /* ── ENHANCED CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--blue), var(--swirl));
+      border-top: 1px solid var(--gold-border);
+      border-bottom: 1px solid var(--gold-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,196,98,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── BOOKING SECTION GLOW ── */
+    .booking-section {
+      background: var(--night);
+      padding: 84px 0;
+      position: relative;
+    }
+    .booking-section::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse, rgba(232,196,98,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.75s, transform 0.75s;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 980px) {
+      .hero { height: 72vw; min-height: 360px; max-height: 660px; }
+      .hero-intro { padding: 38px 24px 48px; }
+      .container { padding: 0 24px; }
+      .pool-callout-inner { grid-template-columns: 1fr; gap: 36px; padding: 0 24px; }
+      .pool-stats { gap: 20px; }
+      .booking-layout { grid-template-columns: 1fr; }
+      .booking-layout > .booking-widget { order: -1; }
+      .highlights-grid { grid-template-columns: repeat(3, 1fr); }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .diff-grid { grid-template-columns: 1fr; gap: 14px; }
+      .location-grid { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+
+      .gtk-grid { grid-template-columns: 1fr 1fr; }
+      .trust-bar { padding: 14px 20px; gap: 12px; flex-direction: row; align-items: stretch; overflow: hidden; }
+      .trust-bar > * { display: none; }
+      .trust-sep { display: none; }
+      .trust-marquee-wrapper {
+        display: flex !important;
+        overflow: hidden;
+        width: 100%;
+        padding: 14px 0;
+      }
+      .trust-marquee {
+        display: flex;
+        gap: 32px;
+        white-space: nowrap;
+        animation: marquee 30s linear infinite;
+        flex-shrink: 0;
+      }
+      .trust-marquee:hover { animation-play-state: paused; }
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .trust-marquee-item {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 0.78rem; color: rgba(255,255,255,0.65);
+        white-space: nowrap;
+      }
+      .trust-marquee-dot { color: var(--gold); opacity: 0.5; margin: 0 4px; }
+      .footer { padding: 32px 24px 96px; }
+      .cta-content { padding: 60px 24px; }
+      .mobile-book-bar { display: flex; }
+      .meta-divider { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero { height: 78vw; min-height: 280px; }
+      .hero-intro { padding: 28px 20px 38px; }
+      .hero-title { font-size: clamp(2.3rem, 10vw, 3rem); }
+      .hero-sub { font-size: 0.92rem; margin-bottom: 20px; }
+      .highlights-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+      .gallery-item img { height: 250px; }
+
+      .gallery-tabs { padding: 0 20px; }
+      .hero-actions { flex-direction: column; gap: 10px; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .nav { padding: 0 16px; height: 58px; }
+      .nav-logo-sub { display: none; }
+      .nav-right .nav-link { display: none; }
+      .nav-book { padding: 9px 16px; font-size: 0.74rem; }
+      .reviews-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .gtk-grid { grid-template-columns: 1fr; }
+      .location-map { height: 270px; }
+      .contact-form { padding: 24px 18px; }
+      .footer { padding: 28px 20px 96px; flex-direction: column; align-items: flex-start; gap: 14px; }
+      .section-title { font-size: clamp(1.7rem, 7vw, 2.4rem); }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VacationRental",
+  "name": "Lightning Bug Holler",
+  "description": "3-level cabin in Pigeon Forge, TN with private indoor pool wrapped in a hand-painted Van Gogh Starry Night mural, arcade game room, hot tub, infrared sauna, outdoor pizza oven, secret clubhouse, and multi-level fire pit decks. Sleeps 7. Pets welcome.",
+  "url": "https://lightningbugholler.net/",
+  "image": [
+    "c7f6895a-c03c-42bf-b9bd-8832c338a975.avif",
+    "f9a8d463-5cc3-4553-b2be-ddf3d51807b4.avif",
+    "3916624f-e475-4e96-8bbc-446f4a5223c6.avif"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Pigeon Forge",
+    "addressRegion": "TN",
+    "postalCode": "37863",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 35.7876,
+    "longitude": -83.5541
+  },
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "Private Indoor Pool", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Hot Tub", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Infrared Sauna", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Arcade Game Room", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Outdoor Pizza Oven", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Fire Pit", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Outdoor TV", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "WiFi", "value": true}
+  ],
+  "occupancy": {
+    "@type": "QuantitativeValue",
+    "maxValue": 7
+  },
+  "numberOfRooms": 2,
+  "petsAllowed": true,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.97",
+    "reviewCount": "100",
+    "bestRating": "5"
+  }
+}
+</script>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+<canvas id="stars-canvas"></canvas>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <a href="#home" class="nav-logo">
+    <span class="nav-logo-bug">🐛</span>
+    <span class="nav-logo-text">
+      Lightning Bug <em style="font-style:italic;">Holler</em>
+      <span class="nav-logo-sub">Pigeon Forge, TN</span>
+    </span>
+  </a>
+  <div class="nav-right">
+    <a href="#gallery" class="nav-link">Photos</a>
+    <a href="#amenities" class="nav-link">Amenities</a>
+    <a href="#location" class="nav-link">Location</a>
+    <a href="#reviews" class="nav-link">Reviews</a>
+    <a href="#contact" class="nav-link">Ask Us</a>
+    <a href="#book" class="nav-book">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-slide active">
+      <img src="431655a8-2a39-44e4-a338-a04857badedc.avif" alt="Lightning Bug Holler exterior" loading="eager" />
+    </div>
+    <div class="hero-slide">
+      <img src="c7f6895a-c03c-42bf-b9bd-8832c338a975.avif" alt="Private indoor pool with Van Gogh mural" loading="lazy" />
+    </div>
+    <div class="hero-slide">
+      <img src="f9a8d463-5cc3-4553-b2be-ddf3d51807b4.avif" alt="Fire pit deck with outdoor TV" loading="lazy" />
+    </div>
+    <div class="hero-slide">
+      <img src="3916624f-e475-4e96-8bbc-446f4a5223c6.avif" alt="Arcade game room" loading="lazy" />
+    </div>
+    <div class="hero-slide">
+      <img src="f944e49b-f141-4587-b1d0-7f1905149eab.avif" alt="Teepee reading nook" loading="lazy" />
+    </div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-indicators" id="hero-indicators"></div>
+</section>
+
+<!-- HERO INTRO -->
+<div class="hero-intro" id="home-intro">
+  <div class="hero-intro-inner fade-in">
+    <div class="hero-eyebrow">Pigeon Forge, TN · Minutes from Dollywood &amp; Great Smoky Mountains</div>
+    <h1 class="hero-title">Lightning Bug <em>Holler</em></h1>
+    <p class="hero-sub">A 3-level cabin unlike anything else in Pigeon Forge. Private indoor pool wrapped in a hand-painted Van Gogh mural. Arcade game room. Hot tub. Sauna. Fire pit decks. The kind of place you'll rebook before you leave.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Sleeps 7
+      </div>
+      <div class="meta-divider"></div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        2 Bedrooms · 2.5 Baths
+      </div>
+      <div class="meta-divider"></div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        4.97 ★ · 100+ Reviews
+      </div>
+      <div class="meta-divider"></div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Book Direct &amp; Save
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#book" class="btn-primary">Book Now →</a>
+      <a href="#gallery" class="btn-ghost">View All Photos</a>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">💰</span><span><span class="trust-highlight">Best Rate Guaranteed</span> — no OTA service fees</span></div>
+  <span class="trust-sep">|</span>
+  <div class="trust-item"><span class="trust-icon">🎁</span><span>Return guests get a <span class="trust-highlight">discount</span> · Refer a friend = <span class="trust-highlight">Free Night</span></span></div>
+  <span class="trust-sep">|</span>
+  <div class="trust-item"><span class="trust-icon">📅</span><span>Real-time calendar · Instant confirmation</span></div>
+  <span class="trust-sep">|</span>
+  <div class="trust-item"><span class="trust-icon">🐾</span><span>Pets welcome · Ample parking</span></div>
+  <div class="trust-marquee-wrapper" style="display:none;">
+    <div class="trust-marquee">
+      <span class="trust-marquee-item">💰 <span><span style="color:var(--gold);font-weight:600;">Best Rate Guaranteed</span> — no OTA service fees</span></span>
+      <span class="trust-marquee-dot">·</span>
+      <span class="trust-marquee-item">🐾 Pets welcome · Ample parking</span>
+      <span class="trust-marquee-dot">·</span>
+      <span class="trust-marquee-item">🎁 Return guests get a <span style="color:var(--gold);font-weight:600;">discount</span> · Refer a friend = <span style="color:var(--gold);font-weight:600;">Free Night</span></span>
+      <span class="trust-marquee-dot">·</span>
+      <span class="trust-marquee-item">📅 Real-time calendar · Instant confirmation</span>
+      <span class="trust-marquee-dot">·</span>
+      <!-- Duplicate set for seamless loop -->
+      <span class="trust-marquee-item">💰 <span><span style="color:var(--gold);font-weight:600;">Best Rate Guaranteed</span> — no OTA service fees</span></span>
+      <span class="trust-marquee-dot">·</span>
+      <span class="trust-marquee-item">🐾 Pets welcome · Ample parking</span>
+      <span class="trust-marquee-dot">·</span>
+      <span class="trust-marquee-item">🎁 Return guests get a <span style="color:var(--gold);font-weight:600;">discount</span> · Refer a friend = <span style="color:var(--gold);font-weight:600;">Free Night</span></span>
+      <span class="trust-marquee-dot">·</span>
+      <span class="trust-marquee-item">📅 Real-time calendar · Instant confirmation</span>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section section" id="gallery">
+  <div class="gallery-header fade-in">
+    <div class="section-eyebrow">The Property</div>
+    <div class="section-title">Every room tells a <em>story</em></div>
+  </div>
+  <div class="gallery-tabs">
+    <button class="gallery-tab active" data-tab="all" onclick="filterGallery('all', this)">All</button>
+    <button class="gallery-tab" data-tab="pool" onclick="filterGallery('pool', this)">Pool &amp; Hot Tub</button>
+    <button class="gallery-tab" data-tab="games" onclick="filterGallery('games', this)">Game Room</button>
+    <button class="gallery-tab" data-tab="outdoors" onclick="filterGallery('outdoors', this)">Decks &amp; Outdoors</button>
+    <button class="gallery-tab" data-tab="spaces" onclick="filterGallery('spaces', this)">Bedrooms &amp; Spaces</button>
+  </div>
+  <div class="gallery-grid" id="gallery-grid">
+
+    <!-- ROW 1: pool · outdoor · indoor -->
+    <div class="gallery-item" data-category="pool" onclick="openLightbox(0)">
+      <img src="c7f6895a-c03c-42bf-b9bd-8832c338a975.avif" alt="Indoor pool with Van Gogh Starry Night mural" loading="lazy" />
+      <div class="gallery-item-label">Indoor pool — Van Gogh mural</div>
+    </div>
+    <div class="gallery-item" data-category="outdoors" onclick="openLightbox(1)">
+      <img src="43357eca-0c9f-450a-a026-23139202f149.jpg" alt="Deck with fire pit table and giant checkers" loading="lazy" />
+      <div class="gallery-item-label">Deck fire pit &amp; giant checkers</div>
+    </div>
+    <div class="gallery-item" data-category="games" onclick="openLightbox(2)">
+      <img src="3916624f-e475-4e96-8bbc-446f4a5223c6.avif" alt="Arcade game room" loading="lazy" />
+      <div class="gallery-item-label">Arcade game room</div>
+    </div>
+
+    <!-- ROW 2: outdoor · indoor · outdoor -->
+    <div class="gallery-item" data-category="outdoors" onclick="openLightbox(3)">
+      <img src="6264b7cd-f32b-46b7-8c11-a8c419205844.jpg" alt="Lounge deck with string lights and wooded views" loading="lazy" />
+      <div class="gallery-item-label">Lounge deck with string lights</div>
+    </div>
+    <div class="gallery-item" data-category="games" onclick="openLightbox(4)">
+      <img src="0debb169-cab2-41a0-88dc-b1437f84ab41.avif" alt="Arcade with sauna" loading="lazy" />
+      <div class="gallery-item-label">Arcade &amp; infrared sauna</div>
+    </div>
+    <div class="gallery-item" data-category="outdoors" onclick="openLightbox(5)">
+      <img src="74a7a62a-ea6b-4d5b-95fa-7e3537b4d43d.avif" alt="Covered deck with grill and outdoor dining" loading="lazy" />
+      <div class="gallery-item-label">Covered deck — grill &amp; dining</div>
+    </div>
+
+    <!-- ROW 3: indoor · outdoor · indoor -->
+    <div class="gallery-item" data-category="spaces" onclick="openLightbox(6)">
+      <img src="4e0f9c12-d015-4167-b8c0-4a9ceefb86bb.avif" alt="Full kitchen" loading="lazy" />
+      <div class="gallery-item-label">Full kitchen</div>
+    </div>
+    <div class="gallery-item" data-category="outdoors" onclick="openLightbox(7)">
+      <img src="8514d536-d212-44a7-830e-beb94576f6d9.jpg" alt="Boxwood wall — Where the Wild Ones Play" loading="lazy" />
+      <div class="gallery-item-label">Where the Wild Ones Play</div>
+    </div>
+    <div class="gallery-item" data-category="spaces" onclick="openLightbox(8)">
+      <img src="f944e49b-f141-4587-b1d0-7f1905149eab.avif" alt="Teepee reading nook" loading="lazy" />
+      <div class="gallery-item-label">Teepee reading nook</div>
+    </div>
+
+    <!-- === HIDDEN — revealed by Show More === -->
+    <div class="gallery-item gallery-hidden" data-category="outdoors" onclick="openLightbox(10)">
+      <div class="gallery-item-label">Deck fire pit with outdoor TV</div>
+    </div>
+
+    <div class="gallery-item gallery-hidden" data-category="games" onclick="openLightbox(11)">
+      <img src="01459087-3381-4875-a993-beb8773e5fd5.avif" alt="Air hockey" loading="lazy" />
+      <div class="gallery-item-label">Air hockey</div>
+    </div>
+
+    <div class="gallery-item gallery-hidden" data-category="games" onclick="openLightbox(12)">
+      <img src="d9da62ad-6c79-4e92-b004-420b12571704.avif" alt="Game room neon" loading="lazy" />
+      <div class="gallery-item-label">Game room neon</div>
+    </div>
+
+    <div class="gallery-item gallery-hidden" data-category="spaces" onclick="openLightbox(13)">
+      <img src="3426d078-8f5e-463c-8e70-2fb24c312cd1.avif" alt="Kids loft" loading="lazy" />
+      <div class="gallery-item-label">Kids loft</div>
+    </div>
+
+    <div class="gallery-item gallery-hidden" data-category="spaces" onclick="openLightbox(14)">
+      <img src="161b4881-ef49-4d9c-8273-e91296513361.avif" alt="Popcorn machine" loading="lazy" />
+      <div class="gallery-item-label">Popcorn machine</div>
+    </div>
+
+    <div class="gallery-item gallery-hidden" data-category="spaces" onclick="openLightbox(15)">
+      <img src="2efdfcaa-2fca-4d54-a5e7-5e2624d4400f.avif" alt="Cabin interior" loading="lazy" />
+      <div class="gallery-item-label">Cabin interior</div>
+    </div>
+
+    <div class="gallery-item gallery-hidden" data-category="spaces" onclick="openLightbox(16)">
+      <img src="0bf94b02-dc42-4f87-a036-062084ae309a.avif" alt="Cabin interior" loading="lazy" />
+      <div class="gallery-item-label">Cabin interior</div>
+    </div>
+
+    <div class="gallery-item gallery-hidden" data-category="spaces" onclick="openLightbox(17)">
+      <img src="4f2ecba5-ff9d-454b-97be-3148834fb8f0.avif" alt="Cabin interior" loading="lazy" />
+      <div class="gallery-item-label">Cabin interior</div>
+    </div>
+
+    <div class="gallery-item gallery-hidden" data-category="spaces" onclick="openLightbox(18)">
+      <img src="1563e576-7ceb-4caf-ab13-113491db7563.avif" alt="Cabin interior" loading="lazy" />
+      <div class="gallery-item-label">Cabin interior</div>
+    </div>
+
+  </div>
+
+  <!-- Show More button -->
+  <div class="gallery-show-more-wrap" id="gallery-more-wrap">
+    <button class="gallery-show-more" id="gallery-show-more-btn" onclick="toggleGalleryMore()">
+      <span id="gallery-more-label">+ 9 More Photos</span>
+    </button>
+  </div>
+</section>
+
+<!-- POOL SHOWCASE -->
+<section class="pool-callout section fade-in">
+  <div class="pool-callout-inner">
+    <div class="pool-img-wrap fade-in">
+      <img src="c7f6895a-c03c-42bf-b9bd-8832c338a975.avif" alt="Private indoor pool with Van Gogh Starry Night mural" loading="lazy" />
+      <div class="pool-img-badge">Hand-Painted Van Gogh Mural · Year-Round</div>
+    </div>
+    <div class="fade-in">
+      <div class="pool-text-eyebrow">The Crown Jewel</div>
+      <div class="pool-text-title">Your Own <em>Starry Night</em> Pool</div>
+      <p class="pool-text-desc">Step into a private heated swim spa wrapped floor-to-ceiling in a one-of-a-kind hand-painted Van Gogh Starry Night mural. No sharing, no schedules — available to you 24/7 regardless of weather or season. This alone makes Lightning Bug Holler unlike anything else in the Smokies.</p>
+      <div class="pool-stats">
+        <div>
+          <div class="pool-stat-num">24/7</div>
+          <div class="pool-stat-label">Private Access</div>
+        </div>
+        <div>
+          <div class="pool-stat-num">100%</div>
+          <div class="pool-stat-label">Hand-Painted</div>
+        </div>
+        <div>
+          <div class="pool-stat-num">Year-Round</div>
+          <div class="pool-stat-label">Heated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights section" id="highlights">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-eyebrow">What Makes It Special</div>
+      <div class="section-title">Not your average <em>Smoky Mountain cabin</em></div>
+    </div>
+    <div class="highlights-grid">
+      <div class="highlight-card fade-in">
+        <span class="highlight-icon">🏊</span>
+        <div class="highlight-title">Private Indoor Pool</div>
+        <div class="highlight-desc">A private heated swim spa wrapped floor-to-ceiling in a hand-painted Van Gogh Starry Night mural. Yours alone, year-round, day or night — no sharing, no schedules.</div>
+      </div>
+      <div class="highlight-card fade-in">
+        <span class="highlight-icon">🕹️</span>
+        <div class="highlight-title">Arcade Game Room</div>
+        <div class="highlight-desc">Ms. Pac-Man, Street Fighter II, X-Men Capcom, air hockey, infrared sauna, neon signs. A full entertainment floor that makes adults feel like kids again.</div>
+      </div>
+      <div class="highlight-card fade-in">
+        <span class="highlight-icon">🔥</span>
+        <div class="highlight-title">Multi-Level Decks</div>
+        <div class="highlight-desc">Fire pit tables, outdoor TV on a boxwood wall, hot tub, string lights, and wooded mountain views. Multiple outdoor living areas for every mood.</div>
+      </div>
+      <div class="highlight-card fade-in">
+        <span class="highlight-icon">🏔️</span>
+        <div class="highlight-title">Unbeatable Location</div>
+        <div class="highlight-desc">Half a mile to the Parkway, under 4 miles to Dollywood, minutes to The Island, and 15 minutes to Great Smoky Mountains National Park.</div>
+      </div>
+      <div class="highlight-card fade-in">
+        <span class="highlight-icon">🍕</span>
+        <div class="highlight-title">Pizza Oven &amp; Secret Clubhouse</div>
+        <div class="highlight-desc">Wood-fired pizza nights on the deck, plus a secret third-floor fort that kids absolutely lose their minds over. The kind of details that make a vacation unforgettable.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section class="diff-section section">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-eyebrow">Why Guests Keep Coming Back</div>
+      <div class="section-title">Beyond the <em>amenities</em></div>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card fade-in">
+        <div class="diff-card-icon">🐾</div>
+        <div>
+          <div class="diff-card-title">Truly Pet Friendly</div>
+          <div class="diff-card-desc">Bring the whole family — including the four-legged ones. We genuinely welcome pets and make it easy. No sneaking around, no stress.</div>
+        </div>
+      </div>
+      <div class="diff-card fade-in">
+        <div class="diff-card-icon">🚗</div>
+        <div>
+          <div class="diff-card-title">Ample Parking</div>
+          <div class="diff-card-desc">Driveway fits 2 full-size SUVs plus 2 motorcycles. No parking garage, no street hunting, no stress getting in and out of the mountains.</div>
+        </div>
+      </div>
+      <div class="diff-card fade-in">
+        <div class="diff-card-icon">💬</div>
+        <div>
+          <div class="diff-card-title">Real Host Experience</div>
+          <div class="diff-card-desc">When you book direct you get us — not a call center. Fast replies, local tips, and a team that genuinely cares your stay is exceptional.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities-section section" id="amenities">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-eyebrow">Everything Included</div>
+      <div class="section-title">Amenities</div>
+    </div>
+    <div class="amenities-inner fade-in">
+
+      <div class="amenity-group">
+        <div class="amenity-group-title">Recreation</div>
+        <div class="amenity-chips">
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Private heated indoor pool</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Private hot tub</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Infrared sauna</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Arcade game room (4 machines)</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Air hockey table</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Outdoor pizza oven</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Secret clubhouse / kids' fort</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Board games, puzzles &amp; books</span>
+        </div>
+      </div>
+
+      <div class="amenity-group">
+        <div class="amenity-group-title">Outdoors</div>
+        <div class="amenity-chips">
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Fire pit with seating</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Outdoor TV on boxwood wall</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Multi-level decks</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Outdoor grill</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Hammock</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Sun loungers</span>
+        </div>
+      </div>
+
+      <div class="amenity-group">
+        <div class="amenity-group-title">Kitchen &amp; Dining</div>
+        <div class="amenity-chips">
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Fully equipped kitchen</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Island with dining seating</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Stove, oven, microwave, dishwasher</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Vintage popcorn machine</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Coffee maker &amp; full cookware</span>
+        </div>
+      </div>
+
+      <div class="amenity-group">
+        <div class="amenity-group-title">Comfort &amp; Essentials</div>
+        <div class="amenity-chips">
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>2 bedrooms · 2.5 baths</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>2 kings + 1 queen + sofa sleeper</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>High-speed WiFi (whole property)</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Smart TVs + streaming throughout</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Pet friendly</span>
+          <span class="amenity-chip"><span class="amenity-chip-check">✓</span>Parking for 2 SUVs + 2 motorcycles</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GOOD TO KNOW -->
+<section class="gtk-section section">
+  <div class="container">
+    <div class="fade-in" style="margin-bottom: 0;">
+      <div class="section-eyebrow">Before You Book</div>
+      <div class="section-title" style="font-size:1.6rem;">Good to Know</div>
+    </div>
+    <div class="gtk-grid">
+      <div class="gtk-card">
+        <div class="gtk-icon">⏰</div>
+        <div>
+          <div class="gtk-label">Check-in / Check-out</div>
+          <div class="gtk-value">Check-in: 4:00 PM<br>Check-out: 10:00 AM</div>
+        </div>
+      </div>
+      <div class="gtk-card">
+        <div class="gtk-icon">🪪</div>
+        <div>
+          <div class="gtk-label">Booking Age</div>
+          <div class="gtk-value">Minimum booking age<br>is 21 years old</div>
+        </div>
+      </div>
+      <div class="gtk-card">
+        <div class="gtk-icon">🐾</div>
+        <div>
+          <div class="gtk-label">Pets</div>
+          <div class="gtk-value">Pets welcome<br>Pet fee may apply</div>
+        </div>
+      </div>
+      <div class="gtk-card">
+        <div class="gtk-icon">🚗</div>
+        <div>
+          <div class="gtk-label">Parking</div>
+          <div class="gtk-value">Driveway: 2 SUVs<br>+ 2 motorcycles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section section" id="book">
+  <div class="container">
+    <div class="booking-layout">
+      <div class="booking-left fade-in">
+        <div class="section-eyebrow">Book Direct</div>
+        <div class="section-title">Reserve Your <em>Stay</em></div>
+        <p class="booking-pitch">Booking directly through us means the best available rate — no Airbnb or VRBO service fees eating into your budget. You'll also have direct access to us throughout your entire stay.</p>
+
+        <div class="direct-perks">
+          <div class="perk">
+            <div class="perk-icon">💰</div>
+            <div class="perk-text">
+              <strong>Best Rate — Guaranteed</strong>
+              <span>Skip the 14–20% OTA service fees. Same property, better price.</span>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">🔄</div>
+            <div class="perk-text">
+              <strong>Return Guest Discount</strong>
+              <span>Stayed before? You get an exclusive discount every time you come back.</span>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">🎁</div>
+            <div class="perk-text">
+              <strong>Refer a Friend — Earn a Free Night</strong>
+              <span>Send a friend our way and you'll earn a free night on your next stay.</span>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">🏷️</div>
+            <div class="perk-text">
+              <strong>Exclusive Local Discounts</strong>
+              <span>Direct bookers get access to partner discounts on local attractions and dining.</span>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">💬</div>
+            <div class="perk-text">
+              <strong>Direct Host Access</strong>
+              <span>Reach us directly — before, during, and after your stay. No middleman.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="price-callout">
+          <div class="price-from">Rates</div>
+          <div class="price-note" style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin-top:0;">Rates vary by season and length of stay. 2-night minimum. Peak weekends and holidays vary. Contact us for current pricing.</div>
+        </div>
+      </div>
+
+      <!-- HOSPITABLE DIRECT WIDGET -->
+      <div class="booking-widget fade-in">
+        <div class="booking-widget-header">
+          <div class="booking-widget-title">Check Availability &amp; Book</div>
+          <div class="booking-widget-sub">Lightning Bug Holler · Pigeon Forge, TN</div>
+        </div>
+        <div class="booking-widget-body">
+          <div class="urgency-badge">
+            <div class="urgency-dot"></div>
+            <div class="urgency-text"><strong>In demand</strong> — booked 23 of the last 30 nights</div>
+          </div>
+          <div id="hospitable-widget">
+            <iframe id="booking-iframe" sandbox="allow-top-navigation allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox" style="width: 100%; height: 900px; border-radius: 0 0 12px 12px; display: block; margin-top: 14px; border: none;" src="https://booking.hospitable.com/widget/a136a475-61b7-4ac7-9bd6-2bf3d5e3d77c/1999416"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section section" id="location">
+  <div class="container">
+    <div class="location-grid">
+      <div class="fade-in">
+        <div class="section-eyebrow">Location</div>
+        <div class="section-title">Pigeon Forge, TN —<br><em>close to everything</em></div>
+        <div class="distance-list">
+          <div class="distance-item">
+            <span class="distance-place">🎡 Dollywood</span>
+            <span class="distance-time">~10 min</span>
+          </div>
+          <div class="distance-item">
+            <span class="distance-place">🌴 The Island in Pigeon Forge</span>
+            <span class="distance-time">~10 min</span>
+          </div>
+          <div class="distance-item">
+            <span class="distance-place">🦈 Ripley's Aquarium of the Smokies</span>
+            <span class="distance-time">~12 min</span>
+          </div>
+          <div class="distance-item">
+            <span class="distance-place">🎭 Dinner Shows &amp; Shopping</span>
+            <span class="distance-time">~5 min</span>
+          </div>
+          <div class="distance-item">
+            <span class="distance-place">🏔️ Great Smoky Mountains National Park</span>
+            <span class="distance-time">~15 min</span>
+          </div>
+          <div class="distance-item">
+            <span class="distance-place">🧗 Zip-lining &amp; Adventure Tours</span>
+            <span class="distance-time">Minutes away</span>
+          </div>
+        </div>
+      </div>
+      <div class="location-map fade-in">
+        <!-- Google Maps embed — no API key required -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3236.754600387894!2d-83.5647726242078!3d35.781403972555104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885bffa677a9022d%3A0x909f610ed41a0a4f!2s3329%20Spring%20Stone%20Way%2C%20Pigeon%20Forge%2C%20TN%2037863!5e0!3m2!1sen!2sus!4v1772574497728!5m2!1sen!2sus"
+          width="100%" height="100%"
+          style="border:0; display:block;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lightning Bug Holler location map">
+        </iframe>
+        <div class="location-overlay"></div>
+        <div class="map-pin">
+          <strong>Lightning Bug Holler</strong>
+          Pigeon Forge, TN
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section section" id="reviews">
+  <div class="container">
+    <div class="reviews-header fade-in">
+      <div>
+        <div class="section-eyebrow">Guest Reviews</div>
+        <div class="section-title">What guests<br><em>are saying</em></div>
+      </div>
+      <div>
+        <div class="rating-num">4.97</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-count">100+ reviews on Airbnb</div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"We had such a great stay! It was a perfect mix for all ages — the arcade games, indoor pool, hot tub, and especially the third-floor fort for the grandkids were a huge hit. There was always something to do, and when we wanted to get out, all the attractions were just a few minutes down the road."</div>
+        <div class="review-author">— Leland · 1 week ago</div>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"I set out to have a nice family vacation in the mountains, with my sister and her family. This cabin not only delivered, but it exceeded our expectations. From the secret clubhouse to the beautiful indoor pool, this cabin had a variety of entertainment waiting in every corner. Thank you Lightning Bug Holler for an amazing time!"</div>
+        <div class="review-author">— Breanna · 2 weeks ago</div>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"We visited with our 4 kids and had the best time! There was something fun for each of them to do. The pool and hot tub were spotless, and we loved relaxing by the fire pits in the evenings. The pizza oven was a total highlight — it made dinner such a fun experience. This place absolutely exceeded our expectations."</div>
+        <div class="review-author">— Savannah · November 2025</div>
+      </div>
+    </div>
+    <div class="reviews-verified fade-in">
+      <span class="reviews-verified-text">Reviews verified on</span>
+      <a href="https://www.airbnb.com/rooms/1511593475372124666?unique_share_id=8bd629e6-21d4-433a-a35c-9078dc72c3f1&viralityEntryPoint=1&s=76&source_impression_id=p3_1772569580_P3xEPnvncW3qhayW" target="_blank" rel="noopener noreferrer" class="reviews-airbnb-link">Airbnb</a>
+      <span class="reviews-verified-sep">·</span>
+      <!-- TODO: Replace # below with your VRBO listing URL when available -->
+      <a href="#" target="_blank" rel="noopener noreferrer" class="reviews-airbnb-link reviews-vrbo-link">VRBO</a>
+      <span class="reviews-verified-note">(Book direct here for the best rate — no service fees)</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section section" id="faq">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-eyebrow">Questions</div>
+      <div class="section-title">Frequently <em>Asked</em></div>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What are the check-in and check-out times?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Check-in is at 4:00 PM and check-out is at 10:00 AM. Early check-in or late check-out may be available depending on the calendar — just message us directly and we'll do our best. Direct bookers always get priority on flexibility requests.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Are pets allowed? Is there a pet fee?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes — we genuinely welcome pets! A pet fee applies (typically $25–$50/stay depending on the size and number of pets). Please disclose your pets at the time of booking so we can prepare accordingly. We'd love to meet them.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How much parking is available?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The driveway comfortably fits 2 full-size SUVs plus 2 motorcycles. No street parking required and no garage fees. Pull right up and unload — it's one of those small things that makes a big difference.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is the cancellation policy?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Our standard cancellation policy is moderate — cancellations more than 30 days before check-in receive a full refund, minus a processing fee. Cancellations within 30 days receive a 50% refund. We strongly recommend travel insurance for full protection, especially during peak season. Message us if you have specific concerns — we're human and will work with you where we can.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is the indoor pool heated year-round?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes! The indoor swim spa is heated and available year-round — winter, summer, rain or shine. Being indoors means you're never at the mercy of the weather. It's one of our most-loved features because you can use it any time of day or night.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Why should I book direct instead of through Airbnb or VRBO?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Booking direct saves you the 14–20% service fees OTAs charge guests. You also get exclusive perks: return guest discounts, a referral free night program, local attraction discounts, and direct access to us — not a support ticket. Same cabin, better deal, better experience.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What's stocked in the cabin when we arrive?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We set you up for a real stay, not a bare-bones one. You'll find linens and towels provided, starter toiletries (soap, shampoo, and the basics), paper towels, toilet paper, trash bags, and a starter set of kitchen essentials including coffee, cooking oil, and basic spices. You won't need a grocery run just to get settled in.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is there a minimum stay requirement?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No minimum stay — you can book as little as one night. That said, most guests find that two or three nights is the sweet spot to really take advantage of everything the cabin has to offer. Peak weekends and holidays may have different minimums reflected in the booking calendar.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is the maximum occupancy?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Lightning Bug Holler sleeps up to 7 guests — 2 kings, 1 queen, and a sofa sleeper. The cabin is permitted and insured for 7 guests maximum. We ask that you honor this limit so everyone (and the cabin) is taken care of.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section section" id="contact">
+  <div class="container">
+    <div class="contact-layout">
+      <div class="fade-in">
+        <div class="section-eyebrow">Get in Touch</div>
+        <div class="section-title">Questions? <em>Ask us anything.</em></div>
+        <p class="contact-pitch">Not ready to book yet? Want to ask about dates, bring your dog, or get local restaurant recommendations? Send us a message — we reply fast and love talking to guests before they arrive.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          Pigeon Forge, TN 37863
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">⭐</div>
+          4.97 · 100+ Five-Star Reviews
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">💬</div>
+          Typically responds within a few hours
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🎁</div>
+          Mention a referral to claim your free night perk
+        </div>
+      </div>
+
+      <div class="contact-form fade-in">
+        <!-- Replace YOUR_FORM_ID with your actual Formspree form ID -->
+        <form id="inquiry-form" action="https://formspree.io/f/mgolgoow" method="POST">
+          <!-- Honeypot spam protection -->
+          <div class="hp-field" aria-hidden="true">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="_subject" value="New inquiry — Lightning Bug Holler" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" name="first_name" required placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" name="last_name" required placeholder="Smith" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="jane@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone (optional)</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkin">Desired Check-in</label>
+              <input type="date" id="checkin" name="checkin" />
+            </div>
+            <div class="form-group">
+              <label for="checkout">Desired Check-out</label>
+              <input type="date" id="checkout" name="checkout" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="guests">Number of Guests</label>
+            <select id="guests" name="guests">
+              <option value="">Select...</option>
+              <option>1–2 guests</option>
+              <option>3–4 guests</option>
+              <option>5–6 guests</option>
+              <option>7 guests (max)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="pets">Bringing pets?</label>
+            <select id="pets" name="pets">
+              <option value="">Select...</option>
+              <option>No pets</option>
+              <option>Yes — 1 small dog/cat</option>
+              <option>Yes — 1 large dog</option>
+              <option>Yes — multiple pets</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Tell us about your trip, ask a question, or mention a referral..."></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Send Message →</button>
+        </form>
+        <div class="form-success" id="form-success">
+          🌙 Message received! We'll be in touch soon.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section section">
+  <div class="cta-content">
+    <div class="section-eyebrow fade-in">Ready?</div>
+    <div class="cta-urgency-badge fade-in">
+      📅 <strong>Summer weekends fill fast</strong> — peak season books 3–4 months out
+    </div>
+    <div class="cta-title fade-in">Your mountain <em>escape awaits.</em></div>
+    <p class="cta-sub fade-in">Lightning Bug Holler books up fast — especially summer weekends and holidays. Booking direct gets you the best price, exclusive perks, and a host that actually picks up the phone.</p>
+    <div class="cta-actions fade-in">
+      <a href="#book" class="btn-primary">Book Now →</a>
+      <a href="#contact" class="btn-ghost">Ask Us a Question</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <a href="#home" class="footer-brand">🐛 Lightning Bug Holler</a>
+  <div class="footer-links">
+    <a href="#gallery">Photos</a>
+    <a href="#amenities">Amenities</a>
+    <a href="#book">Book Now</a>
+    <a href="#location">Location</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-social">
+    <!-- TODO: Replace # below with the influencer video URL when available -->
+    <a href="#" target="_blank" rel="noopener noreferrer" class="footer-instagram" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+  </div>
+  <div class="footer-copy">© 2026 Lightning Bug Holler · Pigeon Forge, TN</div>
+</footer>
+
+<!-- MOBILE BOOKING BAR -->
+<div class="mobile-book-bar" id="mobile-book-bar">
+  <div>
+    <div class="mobile-book-price">$199<small> /night</small></div>
+    <div class="mobile-book-rating"><span>★</span> 4.97 · 100+ reviews</div>
+  </div>
+  <a href="#book" class="mobile-book-btn">Book Now</a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)" aria-label="Previous">‹</button>
+    <img id="lightbox-img" src="" alt="" />
+    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)" aria-label="Next">›</button>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+</div>
+
+<script>
+  /* ══════════════════════════════════════════
+     CONTACT EMAIL (obfuscated from spam bots)
+  ══════════════════════════════════════════ */
+  (function(){
+    const u = 'tnslbh8', d = 'gmail.com';
+    const links = document.querySelectorAll('.email-link');
+    links.forEach(l => {
+      l.href = 'mailto:' + u + '@' + d;
+      l.textContent = u + '@' + d;
+    });
+  })();
+
+  /* ══════════════════════════════════════════
+     FIREFLY / STARS CANVAS
+  ══════════════════════════════════════════ */
+  const canvas = document.getElementById('stars-canvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let mouseX = -999, mouseY = -999;
+  let cursorParticles = [];
+
+  // Track mouse for cursor firefly trail
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (window.innerWidth > 980 && Math.random() < 0.08) {
+      cursorParticles.push({
+        x: mouseX + (Math.random() - 0.5) * 10,
+        y: mouseY + (Math.random() - 0.5) * 10,
+        r: Math.random() * 1.5 + 0.8,
+        alpha: 0.7,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: -(Math.random() * 1.2 + 0.4),
+        life: 1.0,
+        decay: Math.random() * 0.04 + 0.03,
+      });
+    }
+  });
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    const count = window.innerWidth < 600 ? 60 : 120;
+    for (let i = 0; i < count; i++) {
+      const isFirefly = Math.random() < 0.12;
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: isFirefly ? Math.random() * 1.6 + 0.7 : Math.random() * 0.9 + 0.2,
+        a: Math.random() * 0.7 + 0.1,
+        speed: Math.random() * 0.004 + 0.001,
+        phase: Math.random() * Math.PI * 2,
+        isFirefly,
+        drift: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.07,
+        pulseSpeed: Math.random() * 0.02 + 0.008,
+      });
+    }
+  }
+
+  let t = 0;
+  function drawStars() {
+    t += 0.016;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw background stars
+    stars.forEach(s => {
+      const alpha = s.a * (0.45 + 0.55 * Math.sin(t * s.speed * 60 + s.phase));
+      if (s.isFirefly) {
+        s.x += s.drift;
+        s.y += s.vy;
+        if (s.x < 0) s.x = canvas.width;
+        if (s.x > canvas.width) s.x = 0;
+        if (s.y < 0) s.y = canvas.height;
+        if (s.y > canvas.height) s.y = 0;
+
+        // Outer glow
+        const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 4);
+        glow.addColorStop(0, `rgba(190,255,100,${alpha * 0.45})`);
+        glow.addColorStop(0.4, `rgba(160,240,80,${alpha * 0.2})`);
+        glow.addColorStop(1, 'rgba(160,240,80,0)');
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 4, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(230,255,160,${Math.min(alpha * 1.2, 1)})`;
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,252,220,${alpha * 0.7})`;
+        ctx.fill();
+      }
+    });
+
+    // Draw cursor trail particles
+    cursorParticles = cursorParticles.filter(p => p.life > 0);
+    cursorParticles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= p.decay;
+      p.alpha = p.life * 0.85;
+
+      const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+      glow.addColorStop(0, `rgba(200,255,110,${p.alpha})`);
+      glow.addColorStop(1, 'rgba(200,255,110,0)');
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(240,255,180,${Math.min(p.alpha * 1.5, 1)})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(drawStars);
+  }
+
+  resizeCanvas();
+  initStars();
+  requestAnimationFrame(drawStars);
+  window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+
+  /* ══════════════════════════════════════════
+     HERO SLIDESHOW
+  ══════════════════════════════════════════ */
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const indicatorContainer = document.getElementById('hero-indicators');
+  let heroIdx = 0;
+  let heroInterval;
+
+  heroSlides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'hero-indicator' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Go to slide ${i+1}`);
+    dot.addEventListener('click', () => goToSlide(i));
+    indicatorContainer.appendChild(dot);
+  });
+
+  heroSlides.forEach(slide => {
+    const img = slide.querySelector('img');
+    const ox = Math.random() > 0.5 ? 'left' : 'right';
+    const oy = Math.random() > 0.5 ? 'top' : 'bottom';
+    img.style.transformOrigin = `${ox} ${oy}`;
+  });
+
+  function goToSlide(idx) {
+    heroSlides[heroIdx].classList.remove('active');
+    indicatorContainer.children[heroIdx].classList.remove('active');
+    heroIdx = idx;
+    heroSlides[heroIdx].classList.add('active');
+    indicatorContainer.children[heroIdx].classList.add('active');
+    resetHeroInterval();
+  }
+
+  function resetHeroInterval() {
+    clearInterval(heroInterval);
+    heroInterval = setInterval(() => goToSlide((heroIdx + 1) % heroSlides.length), 6000);
+  }
+  resetHeroInterval();
+
+  /* ══════════════════════════════════════════
+     SCROLL PROGRESS BAR
+  ══════════════════════════════════════════ */
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  /* ══════════════════════════════════════════
+     NAV SCROLL BEHAVIOR
+  ══════════════════════════════════════════ */
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ══════════════════════════════════════════
+     MOBILE STICKY BAR
+  ══════════════════════════════════════════ */
+  const mobileBar = document.getElementById('mobile-book-bar');
+  let barShown = false;
+  window.addEventListener('scroll', () => {
+    const should = window.scrollY > window.innerHeight * 0.55;
+    if (should !== barShown) {
+      mobileBar.classList.toggle('visible', should);
+      barShown = should;
+    }
+  }, { passive: true });
+
+  /* ══════════════════════════════════════════
+     SCROLL FADE-IN
+  ══════════════════════════════════════════ */
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => io.observe(el));
+
+  /* ══════════════════════════════════════════
+     LIGHTBOX
+  ══════════════════════════════════════════ */
+  const images = [
+    // Visible 9 (matches grid order)
+    { src: 'c7f6895a-c03c-42bf-b9bd-8832c338a975.avif', alt: 'Indoor pool with Van Gogh Starry Night mural' },       // 0
+    { src: '43357eca-0c9f-450a-a026-23139202f149.jpg',  alt: 'Deck fire pit & giant checkers' },                      // 1
+    { src: '3916624f-e475-4e96-8bbc-446f4a5223c6.avif', alt: 'Arcade game room' },                                    // 2
+    { src: '6264b7cd-f32b-46b7-8c11-a8c419205844.jpg',  alt: 'Lounge deck with string lights' },                      // 3
+    { src: '0debb169-cab2-41a0-88dc-b1437f84ab41.avif', alt: 'Arcade & infrared sauna' },                             // 4
+    { src: '74a7a62a-ea6b-4d5b-95fa-7e3537b4d43d.avif', alt: 'Covered deck — grill & dining' },                       // 5
+    { src: '4e0f9c12-d015-4167-b8c0-4a9ceefb86bb.avif', alt: 'Full kitchen' },                                        // 6
+    { src: '8514d536-d212-44a7-830e-beb94576f6d9.jpg',  alt: 'Where the Wild Ones Play' },                            // 7
+    { src: 'f944e49b-f141-4587-b1d0-7f1905149eab.avif', alt: 'Teepee reading nook' },                                 // 8
+    // Hidden — revealed by Show More (9 items)
+    { src: 'f9a8d463-5cc3-4553-b2be-ddf3d51807b4.avif', alt: 'Deck fire pit with outdoor TV' },                       // 9
+    { src: '01459087-3381-4875-a993-beb8773e5fd5.avif', alt: 'Air hockey' },                                          // 11
+    { src: 'd9da62ad-6c79-4e92-b004-420b12571704.avif', alt: 'Game room neon' },                                      // 12
+    { src: '3426d078-8f5e-463c-8e70-2fb24c312cd1.avif', alt: 'Kids loft' },                                           // 13
+    { src: '161b4881-ef49-4d9c-8273-e91296513361.avif', alt: 'Popcorn machine' },                                     // 14
+    { src: '2efdfcaa-2fca-4d54-a5e7-5e2624d4400f.avif', alt: 'Cabin interior' },                                      // 15
+    { src: '0bf94b02-dc42-4f87-a036-062084ae309a.avif', alt: 'Cabin interior' },                                      // 16
+    { src: '4f2ecba5-ff9d-454b-97be-3148834fb8f0.avif', alt: 'Cabin interior' },                                      // 17
+    { src: '1563e576-7ceb-4caf-ab13-113491db7563.avif', alt: 'Cabin interior' },                                      // 18
+  ];
+
+  let currentIdx = 0;
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lightboxNav(dir) {
+    currentIdx = (currentIdx + dir + images.length) % images.length;
+    updateLightbox();
+  }
+  function updateLightbox() {
+    const img = document.getElementById('lightbox-img');
+    img.src = images[currentIdx].src;
+    img.alt = images[currentIdx].alt;
+    document.getElementById('lightbox-counter').textContent = `${currentIdx + 1} / ${images.length}`;
+  }
+
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Touch swipe for lightbox
+  let touchX = 0, touchY = 0;
+  document.getElementById('lightbox').addEventListener('touchstart', e => {
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  document.getElementById('lightbox').addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    const dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy)) lightboxNav(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* ══════════════════════════════════════════
+     GALLERY SHOW MORE / LESS
+  ══════════════════════════════════════════ */
+  let galleryExpanded = false;
+  function toggleGalleryMore() {
+    galleryExpanded = !galleryExpanded;
+    const hiddenItems = document.querySelectorAll('#gallery-grid .gallery-hidden');
+    const btn = document.getElementById('gallery-show-more-btn');
+    const label = document.getElementById('gallery-more-label');
+    hiddenItems.forEach(item => {
+      item.style.display = galleryExpanded ? 'block' : 'none';
+    });
+    label.textContent = galleryExpanded ? '− Show Less' : '+ 9 More Photos';
+  }
+
+  /* ══════════════════════════════════════════
+     GALLERY TAB FILTER
+  ══════════════════════════════════════════ */
+  function filterGallery(tab, btn) {
+    // Update active tab button
+    document.querySelectorAll('.gallery-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // When filtering by a specific tab, show all matching items (including hidden ones)
+    // When returning to All, restore the show-more state
+    document.querySelectorAll('#gallery-grid .gallery-item').forEach(item => {
+      const matchesTab = tab === 'all' ? true : item.dataset.category === tab;
+      const isHidden = item.classList.contains('gallery-hidden');
+      if (!matchesTab) {
+        item.style.display = 'none';
+      } else if (tab !== 'all') {
+        // Specific tab — show all matching regardless of hidden state
+        item.style.display = 'block';
+      } else {
+        // All tab — respect show-more state
+        item.style.display = (isHidden && !galleryExpanded) ? 'none' : 'block';
+      }
+    });
+    // Update show-more button visibility
+    const wrap = document.getElementById('gallery-more-wrap');
+    wrap.style.display = tab === 'all' ? 'flex' : 'none';
+    // First visible item gets span-2 on desktop — removed, uniform grid now
+  }
+
+  /* ══════════════════════════════════════════
+     FAQ ACCORDION
+  ══════════════════════════════════════════ */
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-question.open').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+    });
+    // Open clicked if it was closed
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  /* ══════════════════════════════════════════
+     HOSPITABLE WIDGET AUTO-RESIZE & REDIRECT
+     Uses Hospitable's official postMessage API:
+     • event.data.iframeHeight — dynamic resize
+     • event.data.hospitable_widget_redirect —
+       navigates guest to checkout when they
+       click "Request to book"
+  ══════════════════════════════════════════ */
+  window.addEventListener("message", function(event) {
+    // Dynamic iframe height
+    if (event.data.iframeHeight) {
+      var iframe = document.getElementById("booking-iframe");
+      if (iframe) {
+        iframe.style.height = event.data.iframeHeight + "px";
+      }
+    }
+    // Booking redirect — guest clicked "Request to book"
+    if (event.data.hospitable_widget_redirect) {
+      window.location.href = event.data.hospitable_widget_redirect;
+    }
+  });
+
+  /* ══════════════════════════════════════════
+     CONTACT FORM
+  ══════════════════════════════════════════ */
+  document.getElementById('inquiry-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-success').classList.add('visible');
+      } else {
+        btn.textContent = 'Error — try again';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Error — try again';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
